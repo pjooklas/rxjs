@@ -1,8 +1,9 @@
 import { of, from } from "rxjs";
+import { map } from "rxjs/operators";
 
-const observable = of([1, 2, 3, 7, 8]);
-// const observable = from([1, 2, 3, 7, 8]);
-// const observable = from(fetch('https://picsum.photos/v2/list'));
+const observable = of(1, 2, 3, 7, 8).pipe(
+    map((value)=> `$${value}` )
+);
 
 const subscirption = observable.subscribe({
     next(value) {
