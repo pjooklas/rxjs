@@ -1,9 +1,14 @@
 import { interval } from "rxjs";
-import { reduce, take, scan } from "rxjs/operators";
+import { reduce, take, scan, tap } from "rxjs/operators";
 
 const observable = interval(500).pipe(
     take(5),
-    scan(
+    tap({
+        next(val) {
+            console.log(val);
+        }
+    }),
+    reduce(
         (acc, val) => acc + val,
         0
     )
