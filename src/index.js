@@ -1,5 +1,5 @@
 import { fromEvent } from "rxjs";
-import { map, mergeMap, take } from "rxjs/operators";
+import { map, switchMap, take } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
 
 
@@ -7,7 +7,7 @@ const button = document.getElementById('btn');
 const observable = fromEvent(
     button, 'click'
 ).pipe(
-    mergeMap(()=> {
+    switchMap(()=> {
         return ajax.getJSON(
             'https://jsonplaceholder.typicode.com/todos/1'
         )
