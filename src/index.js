@@ -10,8 +10,6 @@ const observable = new Observable((subscriber) => {
         console.log('leak');
     }, 1000)
 
-    subscriber.complete()
-
     return () => {
         clearInterval(id)
     }
@@ -19,7 +17,7 @@ const observable = new Observable((subscriber) => {
 
 console.log('before');
 
-observable.subscribe({
+const subscirption = observable.subscribe({
     next: (value) => {
         console.log(value);
     },
@@ -30,5 +28,9 @@ observable.subscribe({
         console.error(err);
     }
 })
+
+setTimeout(() => {
+    subscirption.unsubscribe();
+}, 4000)
 
 console.log('after');
