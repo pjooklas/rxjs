@@ -1,9 +1,12 @@
-import { of, from } from "rxjs";
-import { map } from "rxjs/operators";
+import { of, from, fromEvent } from "rxjs";
+import { map, pluck } from "rxjs/operators";
 
-const observable = of(1, 2, 3, 7, 8).pipe(
-    map((value)=> `$${value}` )
-);
+const observable = fromEvent(
+    document, 'keydown'
+).pipe(
+    // map(event => event.code)
+    pluck('code')
+)
 
 const subscirption = observable.subscribe({
     next(value) {
